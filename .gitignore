@@ -34,3 +34,4 @@ nag_core.py
 baks/
 omni_scan_root.py
 root_snapshot.txt
+STORM_REPO_INVENTORY.md
