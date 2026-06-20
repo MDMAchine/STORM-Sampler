@@ -3,16 +3,16 @@
 
 **Alexander Allan (MDMAchine)**  
 A&E Concepts, New Bedford MA  
-contact@aeconcepts.ai
+aallan@aeconcepts.net
 
-**Version:** v3.1 — Pre-print — Patent Pending  
+**Version:** v3.1 -- Pre-print -- Patent Pending  
 **Date:** June 2026  
 **arXiv target:** cs.SD (Sound), cross-list cs.LG  
 **Supersedes:** v3.0, v2.1, v2.0, v1.0
 
 *IP Notice: This paper establishes prior art for the STORM adaptive stiffness-switching ODE
 sampler, the Look-Back SNR trajectory smoother, the ODE manifold shearing suppression mechanism,
-and the NAG cross-attention suppression core (trade secret — functional behavior described only,
+and the NAG cross-attention suppression core (trade secret -- functional behavior described only,
 internals withheld). A provisional patent application covers these methods. Implementation details
 of the NAG core (nag_core.py) are withheld as trade secrets and are not disclosed in this paper.
 GPL v3 clean math is shared publicly. © 2026 Alexander Allan / A&E Concepts. All rights
@@ -54,11 +54,11 @@ naive: it treats steps near σ=1.0 (maximum noise, high geometric uncertainty) i
 near σ=0 (final detail recovery, highly stable trajectory).
 
 In practice, flow-matching audio diffusion models exhibit a characteristic failure mode at high
-sigma: the velocity field — the direction the ODE is moving through latent space at each step —
+sigma: the velocity field -- the direction the ODE is moving through latent space at each step  -- 
 undergoes sharp directional reversals that standard solvers do not detect or compensate for. These
 reversals create brief but significant trajectory instabilities that manifest acoustically as a
 coherent harmonic resonance artifact. In ACE-Step XL Turbo, this artifact concentrates around
-426 Hz (Ab4) — a musical pitch — which explains why the artifact sounds tonally wrong rather than
+426 Hz (Ab4) -- a musical pitch -- which explains why the artifact sounds tonally wrong rather than
 simply noisy.
 
 This is not a VAE decoder artifact. The artifact persists with alternative decoders and is
@@ -118,7 +118,7 @@ schedule is fixed by the sampler interface) and instead changes solver order whi
 single-NFE per step.
 
 **Look-Ahead/Look-Back flows (arXiv:2602.09449)** provide the mathematical basis for STORM's
-Look-Back SNR smoother — applied here to the per-step denoising trajectory rather than a full-pass
+Look-Back SNR smoother -- applied here to the per-step denoising trajectory rather than a full-pass
 post-process.
 
 ---
@@ -180,7 +180,7 @@ to prediction delta only.
 respectively.
 
 In `"auto"` mode (default), the highest order the cache supports is used at each step. The cache
-fills progressively — early steps run RK2, mid steps RK3/4, late steps RK4/5. Cache depth is
+fills progressively -- early steps run RK2, mid steps RK3/4, late steps RK4/5. Cache depth is
 capped at 5 velocity vectors.
 
 ### 3.3 DPM++3M (Smooth-Region Solver)
@@ -220,7 +220,7 @@ x.lerp_(x_prev_lb, lambda)
 At σ = σ_max (first step): lambda = lambda_base.  
 At σ = 0 (final step): lambda = 0 (smoother fully disengaged, detail preserved).
 
-`x_prev_lb` stores the raw solver output BEFORE the look-back blend is applied — not the
+`x_prev_lb` stores the raw solver output BEFORE the look-back blend is applied -- not the
 already-smoothed output. Storing the pre-lerp value prevents compounding non-linearity where
 each step blends against an already-smoothed reference. This is the v2.1 critical fix.
 
@@ -231,7 +231,7 @@ each step blends against an already-smoothed reference. This is the v2.1 critica
 | 25-step ddim_uniform | 0.55 | 1.3 |
 | 35-step simple | 0.35 | 1.5 |
 
-The perceptual effect — replacing the metallic artifact with musical saturation character — is
+The perceptual effect -- replacing the metallic artifact with musical saturation character -- is
 a byproduct of spectral coherence enforcement in the high-sigma zone. The smoother is not
 targeted at musical character; it is targeted at manifold shearing suppression. The saturation
 character emerges because redistributing spectral energy away from phase-incoherent artifact
@@ -260,14 +260,14 @@ the principal direction reflects the immediate trajectory rather than stale hist
 
 **Usage constraint:** `enable_restarts: false` is the validated default. Restarts at
 low-sigma steps (σ < 0.3) inject energy into crystallizing signal and produce audible artifacts.
-When used, confine to early steps (step ≤ 7). Always use `ancestral_noise_type: "gaussian"` —
+When used, confine to early steps (step ≤ 7). Always use `ancestral_noise_type: "gaussian"`  -- 
 Brownian noise accumulates energy drift via `cumsum / sqrt(T)`.
 
 ### 3.7 NAG Cross-Attention Suppression Core
 
 *Internals withheld as trade secret (nag_core.py). Functional description only.
 Described here for prior art and patent documentation. The NAG core is NOT included
-in the public STORM build and is NOT part of the evaluation configuration — all
+in the public STORM build and is NOT part of the evaluation configuration -- all
 experimental results in Section 4 are produced by the public GPL components
 (Sections 3.1–3.6) without NAG active.*
 
@@ -300,7 +300,7 @@ characterized by:
 - Sustained tonal quality distinct from expected harmonic content
 - Consistent appearance across genres, modulated by genre spectral profile
 - Independence from lower-frequency DiT body resonance hum (74–654 Hz range)
-- Persistence across VAE decoder variants — confirmed ODE-origin, not decoder artifact
+- Persistence across VAE decoder variants -- confirmed ODE-origin, not decoder artifact
 
 The 426 Hz concentration in XL Turbo specifically is a consequence of the model's wider hidden
 dimension (2560 vs 2048). The expanded cross-attention parameter space creates constructive
@@ -323,7 +323,7 @@ recover air with retained hum suppression.
 ### 4.4 NFE Count
 
 STORM maintains a baseline of 1 NFE per step. Stiffness detection reuses the velocity probe
-that STORK computes anyway — no additional model call. Adaptive sub-stepping dynamically
+that STORK computes anyway -- no additional model call. Adaptive sub-stepping dynamically
 allocates additional evaluations only when manifold fractures are detected (cos_sim < 0.0),
 adding at most 1–2 NFE per fracture event, bounded by `SUB_STEP_MAX_DEPTH=2`. In practice,
 fracture events are rare (typically 0–2 per generation) and do not materially affect throughput.
@@ -343,7 +343,7 @@ Confirmed perceptually superior results across tests. "Better than anything else
 mechanism:
 
 > "replaces the typical metallic twinge with a form of distortion that sounds more musical, more
-> explicitly produced — like adding saturation to a track or mix"
+> explicitly produced -- like adding saturation to a track or mix"
 
 **Helikaon23**:
 
@@ -359,7 +359,7 @@ batch perceptual similarity scorer).
 ### 4.6 Perceptual Result
 
 The consistent community finding is that STORM does not simply reduce or attenuate the metallic
-artifact — it eliminates the phase-incoherent character entirely, replacing it with a perceptually
+artifact -- it eliminates the phase-incoherent character entirely, replacing it with a perceptually
 musical quality. This is consistent with the theoretical prediction: ODE manifold shearing
 introduces non-musical phase incoherence; suppressing the shearing allows the learned velocity
 field to produce the expected harmonic structure.
@@ -378,13 +378,13 @@ analog-style harmonic distortion rather than digital artifact.
 The concentration at 426 Hz (Ab4) in ACE-Step XL Turbo is architecture-specific. The XL model's
 wider hidden dimension (2560 vs 2048) creates specific constructive interference patterns between
 frequency components during high-sigma denoising. This frequency is a musical pitch rather than
-an arbitrary noise frequency, which is why the artifact sounds tonally wrong — it is spectrally
+an arbitrary noise frequency, which is why the artifact sounds tonally wrong -- it is spectrally
 coherent, just incorrectly placed. The artifact frequency will differ across model architectures
 and should be empirically measured per deployment.
 
 ### 5.2 Relationship to Adaptive Scientific Solvers
 
-STORM is philosophically related to LSODA and VODE — scientific ODE solvers that detect stiffness
+STORM is philosophically related to LSODA and VODE -- scientific ODE solvers that detect stiffness
 at runtime and switch integration methods accordingly. The difference: scientific adaptive solvers
 use embedded RK pairs to estimate local truncation error and adjust step size. STORM cannot adjust
 step size (the sigma schedule is fixed by the sampler interface) and instead adjusts solver order
@@ -405,12 +405,12 @@ are modality-agnostic. Pre-registered future validation targets: LTX-Video, Wan,
 
 W_LC (Latent Curvature Coherence) is a latent geometry observable pre-registered for integration
 as an inference-time adaptive signal in STORM. W_LC measures cosine similarity between consecutive
-latent snapshots on a deterministic evaluation path — a pure measure of trajectory geometry
+latent snapshots on a deterministic evaluation path -- a pure measure of trajectory geometry
 change. The validated range for well-converged flow-matching models is 1.43–1.59 (scale-invariant
 across 2.6B and 4B XL architectures).
 
 At inference time, W_LC computed over the ODE trajectory provides a real-time signal of manifold
-curvature. Anomalous W_LC (near 0.0 or 1.9999) at mid-sigma indicates manifold stress — premature
+curvature. Anomalous W_LC (near 0.0 or 1.9999) at mid-sigma indicates manifold stress -- premature
 locking or anti-parallel divergence respectively.
 
 Planned integration as a dynamic regulator for the Look-Back lambda:
@@ -448,7 +448,7 @@ application. This paper describes functional behavior only (Section 3.7).
 STORM demonstrates that adaptive solver dispatch based on real-time trajectory stiffness
 measurement is a viable and effective approach to improving diffusion inference quality without
 increasing NFE count. The high-sigma zone of flow-matching audio diffusion models contains
-geometrically distinct regions that benefit from different numerical treatment — this observation
+geometrically distinct regions that benefit from different numerical treatment -- this observation
 generalizes beyond audio to any flow-matching architecture where trajectory curvature is
 non-uniform across the denoising schedule.
 
@@ -466,7 +466,7 @@ through post-processing or model modification.
 [4] Lu et al. "DPM-Solver++." arXiv:2211.01095, 2023.  
 [5] ACE-Step: A Step Towards Music Generation Foundation Models. ByteDance Research, 2025.  
 [6] Sadat et al. "Eliminating Oversaturation and Artifacts of High Guidance Scales in Diffusion Models." arXiv:2410.02416, 2025.  
-[7] arXiv:2602.09449 — Look-Ahead/Look-Back flows.
+[7] arXiv:2602.09449 -- Look-Ahead/Look-Back flows.
 
 ---
 
@@ -480,4 +480,4 @@ ACE-Step team at ByteDance/StepFun for the base model.
 
 *© 2026 Alexander Allan (MDMAchine) · A&E Concepts*  
 *Patent Pending · Trade Secret (NAG core) · All Rights Reserved*  
-*Version 3.1 — June 2026*
+*Version 3.1 -- June 2026*

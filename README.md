@@ -49,9 +49,9 @@ Per-step EMA-smoothed velocity delta ratio, auto-calibrated over the first `cali
 
 ### STORK (Stiff-Region Solver)
 
-Adaptive-order Runge-Kutta using cached velocity derivatives — all orders are single-NFE (no extra model evaluations). Cache fills progressively: early steps run RK2, mid steps RK3/4, late steps RK4/5 in `"auto"` mode.
+Adaptive-order Runge-Kutta using cached velocity derivatives -- all orders are single-NFE (no extra model evaluations). Cache fills progressively: early steps run RK2, mid steps RK3/4, late steps RK4/5 in `"auto"` mode.
 
-Curvature damping: `damping = clamp(cosine_similarity(v_curr, v_prev), 0, 1)` — when the trajectory curves sharply, the correction term is suppressed to prevent over-extrapolation on manifold boundaries.
+Curvature damping: `damping = clamp(cosine_similarity(v_curr, v_prev), 0, 1)` -- when the trajectory curves sharply, the correction term is suppressed to prevent over-extrapolation on manifold boundaries.
 
 **Adaptive sub-stepping:** When a U-turn is detected mid-step (`cos_sim < 0.0`), STORM recursively splits the step into two half-steps (max depth 2), walking the manifold corner carefully.
 
@@ -67,23 +67,23 @@ x_smoothed = lerp(x_next, x_prev_lb, λ)
 At high σ (early steps, where manifold shearing is worst): λ is large → strong reference pull → suppresses shearing.  
 At low σ (late steps, detail recovery): λ → 0 → full trust in current step.
 
-`x_prev_lb` is stored **before** the lerp (not after) — prevents compounding non-linearity. This is the v2.1 critical fix.
+`x_prev_lb` is stored **before** the lerp (not after) -- prevents compounding non-linearity. This is the v2.1 critical fix.
 
 ### Velocity-Aligned SDE Restarts (optional)
 
-Langevin noise injection at designated restart steps. Noise is aligned along the current velocity direction rather than injected isotropically — this maintains directional momentum while destabilizing stuck trajectories.
+Langevin noise injection at designated restart steps. Noise is aligned along the current velocity direction rather than injected isotropically -- this maintains directional momentum while destabilizing stuck trajectories.
 
 ```
 noise_aligned = noise + alignment_strength × velocity / (|velocity| + ε)
 ```
 
-> **Note:** `enable_restarts: false` is gold standard. Late restarts (σ < 0.3) inject energy into crystallizing signal. If restarts needed, use early-only (step ≤ 7). Always use `ancestral_noise_type: "gaussian"` — Brownian noise produces cumulative energy drift.
+> **Note:** `enable_restarts: false` is gold standard. Late restarts (σ < 0.3) inject energy into crystallizing signal. If restarts needed, use early-only (step ≤ 7). Always use `ancestral_noise_type: "gaussian"` -- Brownian noise produces cumulative energy drift.
 
 ---
 
 ## Validated Parameters
 
-### ComfyUI / Python — 25-step ddim_uniform (recommended)
+### ComfyUI / Python -- 25-step ddim_uniform (recommended)
 
 | Parameter | Value | Notes |
 |---|---|---|
@@ -127,7 +127,7 @@ Measured vs Euler baseline, 35-step simple schedule:
 | Air | −28.32% (tunable via look_back_lambda) |
 | Hum suppression | 80% → 15–25% |
 
-Community finding (mvdirty, 2026-05-11): STORM replaces the metallic AI twinge with a form of saturation that sounds explicitly produced — musical rather than artifactual. This is a byproduct of spectral coherence enforcement in the high-sigma zone, not a targeted output.
+Community finding (mvdirty, 2026-05-11): STORM replaces the metallic AI twinge with a form of saturation that sounds explicitly produced -- musical rather than artifactual. This is a byproduct of spectral coherence enforcement in the high-sigma zone, not a targeted output.
 
 ---
 
@@ -185,8 +185,8 @@ C++ port in production: HOT-Step-CPP (scragnog), acestep.cpp (serveurperso).
 
 ### Lua (HOT-Step)
 
-`storm_sampler_core.lua` — standard HOT-Step solver plugin (owns_loop = true).  
-`scragnog_edit_storm_sampler_core.lua` — HOT-Step optimized build with user-friendly labels. Recommended for HOT-Step users.
+`storm_sampler_core.lua` -- standard HOT-Step solver plugin (owns_loop = true).  
+`scragnog_edit_storm_sampler_core.lua` -- HOT-Step optimized build with user-friendly labels. Recommended for HOT-Step users.
 
 Place in your HOT-Step solvers directory. The solver will appear as **STORM** in the solver list.
 
@@ -198,7 +198,7 @@ STORM has the full SNR-adaptive look-back smoother built in. For any other sampl
 BasicScheduler → Sampler → MD: Look-Back Smoother → VAE Decode
 ```
 
-`lambda_base` controls blend strength directly (default 0.05). No sigmas input needed — the post-process version uses the latent's own energy to scale the smoothing perturbation.
+`lambda_base` controls blend strength directly (default 0.05). No sigmas input needed -- the post-process version uses the latent's own energy to scale the smoothing perturbation.
 
 Validated: `lambda_base=0.03-0.08` for gentle post-process smoothing.
 
@@ -213,7 +213,7 @@ STORM is validated at `float32` and `bfloat16`. Strict `float16` can produce NaN
 | File | Description |
 |---|---|
 | `__init__.py` | ComfyUI node registration |
-| `core/storm_sampler_core.py` | Core math — GPL v3, clean |
+| `core/storm_sampler_core.py` | Core math -- GPL v3, clean |
 | `core/storm_sampler_core.lua` | Lua implementation |
 | `core/storm_sampler_core.hpp` | C++ header-only implementation |
 | `core/storm_sampler_core_hotstep.lua` | HOT-Step optimized Lua (credit: scragnog) |
@@ -225,18 +225,18 @@ STORM is validated at `float32` and `bfloat16`. Strict `float16` can produce NaN
 
 ## Acknowledgments
 
-- **[scragnog / Captain HOT-Step](https://github.com/scragnog/HOT-Step-CPP)** — HOT-Step-CPP maintainer. Same-day STORM implementation, HOT-Step Lua port, perceptual validation. The `scragnog_edit` Lua file is his work. Shoutout to scragnog for featuring STORM in HOT-Step-CPP and the love shown on the [HOT-Step repo](https://github.com/scragnog/HOT-Step-CPP).
-- **[serveurperso](https://github.com/ServeurpersoCom/acestep.cpp)** — acestep.cpp maintainer. C++ integration and review.
-- **mvdirty** — Perceptual validation. Coined "metallic twinge → musical saturation."
-- **[dernet / iRedsneth](https://github.com/koda-dernet/Side-Step)** — STORM UI in 44 minutes. C++ port in progress.
-- **Helikaon23** — Early testing and feedback.
-- **mmoalem** — Automated sampler comparison testing.
+- **[scragnog / Captain HOT-Step](https://github.com/scragnog/HOT-Step-CPP)** -- HOT-Step-CPP maintainer. Same-day STORM implementation, HOT-Step Lua port, perceptual validation. The `scragnog_edit` Lua file is his work. Shoutout to scragnog for featuring STORM in HOT-Step-CPP and the love shown on the [HOT-Step repo](https://github.com/scragnog/HOT-Step-CPP).
+- **[serveurperso](https://github.com/ServeurpersoCom/acestep.cpp)** -- acestep.cpp maintainer. C++ integration and review.
+- **mvdirty** -- Perceptual validation. Coined "metallic twinge → musical saturation."
+- **[dernet / iRedsneth](https://github.com/koda-dernet/Side-Step)** -- STORM UI in 44 minutes. C++ port in progress.
+- **Helikaon23** -- Early testing and feedback.
+- **mmoalem** -- Automated sampler comparison testing.
 
 ---
 
 ## License
 
-**GPL v3** — Free for open-source use. See [`LICENSE`](LICENSE).
+**GPL v3** -- Free for open-source use. See [`LICENSE`](LICENSE).
 
 Commercial closed-source integration requires a dual-license commercial exemption. Contact: A&E Concepts.
 
@@ -244,10 +244,10 @@ Commercial closed-source integration requires a dual-license commercial exemptio
 
 ## arXiv
 
-Pre-print: *"STORM: Stabilized Taylor Oscillation with Runge-Kutta Memory — An Adaptive Stiffness-Switching ODE Sampler for Flow-Matching Diffusion Models"*  
+Pre-print: *"STORM: Stabilized Taylor Oscillation with Runge-Kutta Memory -- An Adaptive Stiffness-Switching ODE Sampler for Flow-Matching Diffusion Models"*  
 Alexander Allan (MDMAchine), A&E Concepts
 
-**arXiv link — Coming Soon!**
+**arXiv link -- Coming Soon!**
 
 ---
 

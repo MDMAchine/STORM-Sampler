@@ -5,12 +5,12 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "storm-sampler"
 version = "2.1.1"
-description = "STORM — Adaptive stiffness-switching ODE sampler for flow-matching diffusion models. Eliminates metallic artifacts via geometric trajectory stabilization."
+description = "STORM -- Adaptive stiffness-switching ODE sampler for flow-matching diffusion models. Eliminates metallic artifacts via geometric trajectory stabilization."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "GPL-3.0-or-later" }
 authors = [
-    { name = "Alexander Allan (MDMAchine)", email = "contact@aeconcepts.ai" },
+    { name = "Alexander Allan (MDMAchine)", email = "aallan@aeconcepts.net" },
 ]
 keywords = ["diffusion", "sampler", "ode", "flow-matching", "audio", "comfyui", "ace-step"]
 classifiers = [
