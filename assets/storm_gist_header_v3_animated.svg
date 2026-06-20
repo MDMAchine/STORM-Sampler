@@ -374,7 +374,7 @@
 <text id="sub" x="340" y="49" text-anchor="middle"
       font-family="monospace" font-size="11" fill="#3b7fd4"
       letter-spacing="0.02em">
-  v2.1.0  ·  Stabilized Taylor Oscillation with Runge-Kutta Memory
+  v2.1.1  ·  Stabilized Taylor Oscillation with Runge-Kutta Memory
 </text>
 
 <!-- ═══════════════════════════════════════

@@ -214,22 +214,21 @@ STORM is validated at `float32` and `bfloat16`. Strict `float16` can produce NaN
 |---|---|
 | `__init__.py` | ComfyUI node registration |
 | `core/storm_sampler_core.py` | Core math — GPL v3, clean |
+| `core/storm_sampler_core.lua` | Lua implementation |
+| `core/storm_sampler_core.hpp` | C++ header-only implementation |
+| `core/storm_sampler_core_hotstep.lua` | HOT-Step optimized Lua (credit: scragnog) |
 | `samplers/MD_STORM_Sampler.py` | ComfyUI node wrapper |
 | `samplers/MD_LookBack_Smoother.py` | Standalone look-back smoother node |
-| `samplers/__init__.py` | Python import init |
-| `storm_sampler_core.hpp` | C++ header-only implementation |
-| `storm_sampler_core.lua` | Lua implementation |
-| `scragnog_edit_storm_sampler_core.lua` | HOT-Step optimized Lua (credit: scragnog) |
-| `STORM_Technical_History_v2_1.md` | Full version history v1.0→v2.1 |
+| `docs/STORM_White_Paper_v3.md` | arXiv pre-print |
 
 ---
 
 ## Acknowledgments
 
-- **scragnog / Captain HOT-Step** — HOT-Step-CPP maintainer. Same-day STORM implementation, HOT-Step Lua port, perceptual validation. The `scragnog_edit` Lua file is his work.
-- **serveurperso** — acestep.cpp maintainer. C++ integration and review.
+- **[scragnog / Captain HOT-Step](https://github.com/scragnog/HOT-Step-CPP)** — HOT-Step-CPP maintainer. Same-day STORM implementation, HOT-Step Lua port, perceptual validation. The `scragnog_edit` Lua file is his work. Shoutout to scragnog for featuring STORM in HOT-Step-CPP and the love shown on the [HOT-Step repo](https://github.com/scragnog/HOT-Step-CPP).
+- **[serveurperso](https://github.com/ServeurpersoCom/acestep.cpp)** — acestep.cpp maintainer. C++ integration and review.
 - **mvdirty** — Perceptual validation. Coined "metallic twinge → musical saturation."
-- **dernet / iRedsneth** — STORM UI in 44 minutes. C++ port in progress.
+- **[dernet / iRedsneth](https://github.com/koda-dernet/Side-Step)** — STORM UI in 44 minutes. C++ port in progress.
 - **Helikaon23** — Early testing and feedback.
 - **mmoalem** — Automated sampler comparison testing.
 
@@ -237,7 +236,7 @@ STORM is validated at `float32` and `bfloat16`. Strict `float16` can produce NaN
 
 ## License
 
-**GPL v3** — Free for open-source use. See `LICENSE`.
+**GPL v3** — Free for open-source use. See [`LICENSE`](LICENSE).
 
 Commercial closed-source integration requires a dual-license commercial exemption. Contact: A&E Concepts.
 
@@ -248,7 +247,7 @@ Commercial closed-source integration requires a dual-license commercial exemptio
 Pre-print: *"STORM: Stabilized Taylor Oscillation with Runge-Kutta Memory — An Adaptive Stiffness-Switching ODE Sampler for Flow-Matching Diffusion Models"*  
 Alexander Allan (MDMAchine), A&E Concepts
 
-`[arXiv link — add on submission]`
+**arXiv link — Coming Soon!**
 
 ---
 
