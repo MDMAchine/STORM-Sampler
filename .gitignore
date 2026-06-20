@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ComfyUI output
+output/
+*.png
+*.wav
+
+# Archives
+*.rar
+*.zip
+*.7z
+
+# Internal / private docs (should never be committed)
+STORM_Internal_Reference.md
+nag_core.py
+baks/
+omni_scan_root.py
+root_snapshot.txt

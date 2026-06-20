@@ -1,0 +1,422 @@
+<svg width="100%" viewBox="0 0 690 350" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>STORM v2.1.0 &#x2014; Adaptive ODE Sampler &#x2014; MDMAchine / A&amp;E Concepts</title>
+<desc>Animated header for STORM adaptive stiffness-switching ODE sampler for flow-matching diffusion models</desc>
+
+<defs>
+
+  <!-- ── GLOW FILTERS ── -->
+  <filter id="f-glow-traj" x="-60%" y="-400%" width="220%" height="900%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="4.5" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="f-glow-line" x="-20%" y="-200%" width="140%" height="500%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="1.8" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="f-title" x="-8%" y="-50%" width="116%" height="200%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
+    <feColorMatrix in="b" type="matrix"
+      values="0 0 0 0 0
+              0 0.55 0.9 0 0
+              0 0 0 0 0
+              0 0 0 0.9 0" result="tinted"/>
+    <feMerge><feMergeNode in="tinted"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="f-scan" x="-200%" y="0" width="500%" height="100%">
+    <feGaussianBlur stdDeviation="2 0"/>
+  </filter>
+  <filter id="f-sep-glow" x="-500%" y="-50%" width="1100%" height="200%">
+    <feGaussianBlur stdDeviation="3"/>
+  </filter>
+
+  <!-- ── GRADIENTS ── -->
+  <linearGradient id="g-bg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%"   stop-color="#090e17"/>
+    <stop offset="100%" stop-color="#060a10"/>
+  </linearGradient>
+
+  <!-- Zone fills -->
+  <linearGradient id="g-zone-stork" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%"   stop-color="#00c8ff" stop-opacity="0.11"/>
+    <stop offset="100%" stop-color="#00c8ff" stop-opacity="0.02"/>
+  </linearGradient>
+  <linearGradient id="g-zone-dpm" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%"   stop-color="#4b8fe8" stop-opacity="0.06"/>
+    <stop offset="100%" stop-color="#4b8fe8" stop-opacity="0.01"/>
+  </linearGradient>
+
+  <!-- Trajectory line gradient -->
+  <linearGradient id="g-traj" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%"   stop-color="#00d8ff"/>
+    <stop offset="48%"  stop-color="#00b8f0"/>
+    <stop offset="100%" stop-color="#4b8fe8"/>
+  </linearGradient>
+
+  <!-- Scan line gradient -->
+  <linearGradient id="g-scan" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%"   stop-color="#00c8ff" stop-opacity="0.0"/>
+    <stop offset="25%"  stop-color="#00c8ff" stop-opacity="0.5"/>
+    <stop offset="75%"  stop-color="#00c8ff" stop-opacity="0.5"/>
+    <stop offset="100%" stop-color="#00c8ff" stop-opacity="0.0"/>
+  </linearGradient>
+
+  <!-- Separator line glow gradient -->
+  <linearGradient id="g-sep" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%"   stop-color="#00c8ff" stop-opacity="0.0"/>
+    <stop offset="30%"  stop-color="#00c8ff" stop-opacity="0.5"/>
+    <stop offset="70%"  stop-color="#00c8ff" stop-opacity="0.5"/>
+    <stop offset="100%" stop-color="#00c8ff" stop-opacity="0.0"/>
+  </linearGradient>
+
+</defs>
+
+<style>
+/* ══════════════════════════════════════════════════
+   STORM GitHub Header — Cinematic Animation System
+   © 2026 Alexander Allan (MDMAchine) / A&amp;E Concepts
+   GPL v3
+══════════════════════════════════════════════════ */
+
+/* ── KEYFRAMES ── */
+
+@keyframes bgIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scanSweep {
+  0%   { transform: translateX(-8px);   opacity: 0;   }
+  4%   { opacity: 1; }
+  96%  { opacity: 0.7; }
+  100% { transform: translateX(698px);  opacity: 0;   }
+}
+
+@keyframes titleFlash {
+  0%   { opacity: 0;   filter: blur(8px)  brightness(5); }
+  20%  { opacity: 1;   filter: blur(2px)  brightness(3); }
+  55%  { opacity: 1;   filter: blur(0.5px) brightness(1.4); }
+  100% { opacity: 1;   filter: blur(0px)  brightness(1);   }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeInDim {
+  from { opacity: 0; }
+  to   { opacity: 0.75; }
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(9px); }
+  to   { opacity: 1; transform: translateY(0px); }
+}
+
+@keyframes drawPath {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes drawRaw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes glowBreath {
+  0%,100% { opacity: 0.13; }
+  50%      { opacity: 0.26; }
+}
+
+@keyframes sepBreath {
+  0%,100% { opacity: 0.22; }
+  50%      { opacity: 0.48; }
+}
+
+/* ── ELEMENT TIMING ── */
+
+#bg     { animation: bgIn       0.25s ease           0.0s  both; }
+#scan   { animation: scanSweep  0.75s cubic-bezier(.4,0,.6,1) 0.12s both; }
+
+#title  {
+  animation: titleFlash 0.72s cubic-bezier(.16,1,.3,1) 0.38s both;
+  opacity: 0;
+}
+#sub    {
+  animation: fadeIn 0.55s ease 1.02s both;
+  opacity: 0;
+}
+
+#grid   { animation: fadeInDim  0.45s ease 0.88s both; opacity: 0; }
+#axes   { animation: fadeIn     0.4s  ease 0.88s both; opacity: 0; }
+
+#zone-s { animation: fadeIn 0.55s ease 1.18s both; opacity: 0; }
+#zone-d { animation: fadeIn 0.55s ease 1.35s both; opacity: 0; }
+
+#sep-line {
+  animation: fadeIn 0.4s ease 1.52s both,
+             sepBreath 3.2s ease-in-out 3.0s infinite;
+  opacity: 0;
+}
+#sep-glow {
+  animation: fadeIn 0.4s ease 1.52s both,
+             sepBreath 3.2s ease-in-out 3.0s infinite;
+  opacity: 0;
+}
+
+/* Raw trajectory draws first (behind), dimmer */
+#traj-raw {
+  stroke-dasharray: 1050;
+  stroke-dashoffset: 1050;
+  animation: drawRaw 1.3s cubic-bezier(.4,0,.2,1) 1.28s forwards;
+}
+
+/* STORM glow (wide, blurred, behind main line) */
+#traj-glow {
+  stroke-dasharray: 720;
+  stroke-dashoffset: 720;
+  animation: drawPath 1.0s cubic-bezier(.16,1,.3,1) 1.52s forwards,
+             glowBreath 3.5s ease-in-out 2.75s infinite;
+}
+
+/* STORM main line */
+#traj-main {
+  stroke-dasharray: 720;
+  stroke-dashoffset: 720;
+  animation: drawPath 1.0s cubic-bezier(.16,1,.3,1) 1.52s forwards;
+}
+
+/* Labels stagger after trajectories */
+#lbl-stork  { animation: fadeIn 0.38s ease 2.02s both; opacity: 0; }
+#lbl-dpm    { animation: fadeIn 0.38s ease 2.12s both; opacity: 0; }
+#lbl-lambda { animation: fadeIn 0.38s ease 2.22s both; opacity: 0; }
+#lbl-legend { animation: fadeIn 0.38s ease 2.32s both; opacity: 0; }
+#lbl-sig    { animation: fadeIn 0.38s ease 1.0s  both; opacity: 0; }
+#lbl-yax    { animation: fadeIn 0.38s ease 1.0s  both; opacity: 0; }
+
+#divider    { animation: fadeIn 0.3s ease 2.45s both; opacity: 0; }
+
+/* Badge stagger */
+#b1 { animation: slideUpFade .32s cubic-bezier(.16,1,.3,1) 2.52s both; opacity:0; }
+#b2 { animation: slideUpFade .32s cubic-bezier(.16,1,.3,1) 2.63s both; opacity:0; }
+#b3 { animation: slideUpFade .32s cubic-bezier(.16,1,.3,1) 2.74s both; opacity:0; }
+#b4 { animation: slideUpFade .32s cubic-bezier(.16,1,.3,1) 2.85s both; opacity:0; }
+#b5 { animation: slideUpFade .32s cubic-bezier(.16,1,.3,1) 2.96s both; opacity:0; }
+#b6 { animation: slideUpFade .32s cubic-bezier(.16,1,.3,1) 3.07s both; opacity:0; }
+#b7 { animation: slideUpFade .32s cubic-bezier(.16,1,.3,1) 3.18s both; opacity:0; }
+
+#tagline    { animation: fadeIn 0.55s ease 3.28s both; opacity: 0; }
+
+</style>
+
+<!-- ═══════════════════════════════════════
+     BACKGROUND
+═══════════════════════════════════════ -->
+<rect id="bg" width="690" height="350" fill="url(#g-bg)"/>
+
+<!-- ═══════════════════════════════════════
+     SCAN LINE — sweeps once on load
+═══════════════════════════════════════ -->
+<rect id="scan" x="0" y="0" width="5" height="350"
+      fill="url(#g-scan)" filter="url(#f-scan)"/>
+
+<!-- ═══════════════════════════════════════
+     GRID
+═══════════════════════════════════════ -->
+<g id="grid">
+  <!-- Vertical column guides -->
+  <line x1="166" y1="56" x2="166" y2="228" stroke="#1a2b3a" stroke-width="0.5"/>
+  <line x1="398" y1="56" x2="398" y2="228" stroke="#1a2b3a" stroke-width="0.5"/>
+  <line x1="514" y1="56" x2="514" y2="228" stroke="#1a2b3a" stroke-width="0.5"/>
+  <line x1="622" y1="56" x2="622" y2="228" stroke="#1a2b3a" stroke-width="0.5"/>
+  <!-- Horizontal guides -->
+  <line x1="50" y1="100" x2="622" y2="100" stroke="#1a2b3a" stroke-width="0.5"/>
+  <line x1="50" y1="155" x2="622" y2="155" stroke="#1a2b3a" stroke-width="0.5"/>
+</g>
+
+<!-- ═══════════════════════════════════════
+     AXES
+═══════════════════════════════════════ -->
+<g id="axes">
+  <line x1="50" y1="56"  x2="50"  y2="228" stroke="#253545" stroke-width="0.9"/>
+  <line x1="50" y1="228" x2="622" y2="228" stroke="#253545" stroke-width="0.9"/>
+</g>
+
+<!-- ═══════════════════════════════════════
+     ZONE FILLS
+═══════════════════════════════════════ -->
+<!-- STORK zone: σ 1.0 → 0.5, x 50–282 -->
+<rect id="zone-s" x="50"  y="56" width="232" height="172" fill="url(#g-zone-stork)"/>
+<!-- DPM++ zone: σ 0.5 → 0, x 282–622 -->
+<rect id="zone-d" x="282" y="56" width="340" height="172" fill="url(#g-zone-dpm)"/>
+
+<!-- ═══════════════════════════════════════
+     DISPATCH BOUNDARY  σ=0.5
+═══════════════════════════════════════ -->
+<!-- Glow behind -->
+<line id="sep-glow"  x1="282" y1="56" x2="282" y2="228"
+      stroke="url(#g-sep)" stroke-width="5" filter="url(#f-sep-glow)"/>
+<!-- Crisp dashed line -->
+<line id="sep-line"  x1="282" y1="56" x2="282" y2="228"
+      stroke="#00c8ff" stroke-width="0.7" stroke-dasharray="3,5"/>
+
+<!-- ═══════════════════════════════════════
+     TRAJECTORIES
+═══════════════════════════════════════ -->
+
+<!-- Standard (raw) trajectory — noisy, unstabilised -->
+<path id="traj-raw"
+  d="M 50,142
+     C  68, 86  82,180  100,104
+     C 118, 46 132,184  152,117
+     C 168, 66 188,168  210,107
+     C 228, 60 252,158  278,121
+     C 304, 92 340,152  380,127
+     C 420,107 470,134  530,116
+     C 574,106 600,113  622,108"
+  fill="none"
+  stroke="#e03055"
+  stroke-width="1.1"
+  stroke-dasharray="4,5"
+  opacity="0.26"
+/>
+
+<!-- STORM trajectory — wide glow layer (drawn same time as main) -->
+<path id="traj-glow"
+  d="M 50,142
+     C  74,118  98,152  130,130
+     C 157,113 182,144  210,126
+     C 237,110 262,133  282,121
+     C 328,106 378,123  440,109
+     C 490, 98 556,106  622, 98"
+  fill="none"
+  stroke="#00c8ff"
+  stroke-width="9"
+  stroke-linecap="round"
+  filter="url(#f-glow-traj)"
+/>
+
+<!-- STORM trajectory — crisp main line -->
+<path id="traj-main"
+  d="M 50,142
+     C  74,118  98,152  130,130
+     C 157,113 182,144  210,126
+     C 237,110 262,133  282,121
+     C 328,106 378,123  440,109
+     C 490, 98 556,106  622, 98"
+  fill="none"
+  stroke="url(#g-traj)"
+  stroke-width="2.2"
+  stroke-linecap="round"
+  filter="url(#f-glow-line)"
+/>
+
+<!-- ═══════════════════════════════════════
+     SIGMA AXIS LABELS
+═══════════════════════════════════════ -->
+<g id="lbl-sig" font-family="monospace" font-size="10" fill="#3d5568" text-anchor="middle">
+  <text x="50"  y="244">σ=1.0</text>
+  <text x="166" y="244">σ=0.8</text>
+  <text x="282" y="244">σ=0.5</text>
+  <text x="398" y="244">σ=0.3</text>
+  <text x="514" y="244">σ=0.1</text>
+  <text x="622" y="244">σ=0</text>
+</g>
+
+<!-- Y axis label -->
+<g id="lbl-yax">
+  <text x="16" y="142" font-family="monospace" font-size="9" fill="#253545"
+        text-anchor="middle" transform="rotate(-90 16 142)">stiffness ratio</text>
+</g>
+
+<!-- ═══════════════════════════════════════
+     ZONE LABELS + ANNOTATIONS
+═══════════════════════════════════════ -->
+
+<!-- STORK zone label -->
+<g id="lbl-stork">
+  <rect x="56" y="58" width="134" height="30" rx="3" fill="#060b14" fill-opacity="0.82"/>
+  <text x="63" y="71"  font-family="monospace" font-size="10" font-weight="600" fill="#00c8ff">STORK  RK[2→5]</text>
+  <text x="63" y="83"  font-family="monospace" font-size="9"  fill="#36505f">curvature-damped · sub-step</text>
+</g>
+
+<!-- DPM++ zone label -->
+<g id="lbl-dpm">
+  <rect x="288" y="58" width="102" height="30" rx="3" fill="#060b14" fill-opacity="0.82"/>
+  <text x="294" y="71" font-family="monospace" font-size="10" font-weight="600" fill="#4b8fe8">DPM++3M</text>
+  <text x="294" y="83" font-family="monospace" font-size="9"  fill="#36505f">Adams-Bashforth</text>
+</g>
+
+<!-- Look-back lambda annotation -->
+<g id="lbl-lambda">
+  <text x="158" y="116" font-family="monospace" font-size="9" fill="#4a6878">look-back λ(σ)</text>
+  <line x1="218" y1="113" x2="234" y2="122" stroke="#4a6878" stroke-width="0.7" opacity="0.6"/>
+</g>
+
+<!-- Legend -->
+<g id="lbl-legend" font-family="monospace" font-size="9">
+  <!-- STORM swatch -->
+  <line x1="436" y1="120" x2="458" y2="120"
+        stroke="#00c8ff" stroke-width="2.2" filter="url(#f-glow-line)"/>
+  <text x="463" y="124" fill="#6080a0">STORM v2.1</text>
+  <!-- Standard swatch -->
+  <line x1="436" y1="134" x2="458" y2="134"
+        stroke="#e03055" stroke-width="1.1"
+        stroke-dasharray="4,4" opacity="0.5"/>
+  <text x="463" y="138" fill="#374f60" opacity="0.9">standard ancestral</text>
+</g>
+
+<!-- ═══════════════════════════════════════
+     TITLE
+═══════════════════════════════════════ -->
+<text id="title" x="340" y="32" text-anchor="middle"
+      font-family="monospace" font-size="46" font-weight="700"
+      fill="#d8e8f2" filter="url(#f-title)">STORM</text>
+
+<text id="sub" x="340" y="49" text-anchor="middle"
+      font-family="monospace" font-size="11" fill="#3b7fd4"
+      letter-spacing="0.02em">
+  v2.1.0  ·  Stabilized Taylor Oscillation with Runge-Kutta Memory
+</text>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════ -->
+<line id="divider" x1="40" y1="270" x2="650" y2="270"
+      stroke="#1a2b3a" stroke-width="1"/>
+
+<g font-family="monospace" font-size="9" fill="#6a8a9a">
+  <g id="b1">
+    <rect x="47"  y="280" width="72" height="18" rx="3" fill="#0b1520"/>
+    <text x="83"  y="293" text-anchor="middle">RK2 / 3 / 4 / 5</text>
+  </g>
+  <g id="b2">
+    <rect x="127" y="280" width="82" height="18" rx="3" fill="#0b1520"/>
+    <text x="168" y="293" text-anchor="middle">adaptive sub-step</text>
+  </g>
+  <g id="b3">
+    <rect x="217" y="280" width="78" height="18" rx="3" fill="#0b1520"/>
+    <text x="256" y="293" text-anchor="middle">look-back λ(σ)</text>
+  </g>
+  <g id="b4">
+    <rect x="303" y="280" width="90" height="18" rx="3" fill="#0b1520"/>
+    <text x="348" y="293" text-anchor="middle">velocity-aligned SDE</text>
+  </g>
+  <g id="b5">
+    <rect x="401" y="280" width="44" height="18" rx="3" fill="#0b1520"/>
+    <text x="423" y="293" text-anchor="middle">GPL v3</text>
+  </g>
+  <g id="b6">
+    <rect x="453" y="280" width="88" height="18" rx="3" fill="#0b1520"/>
+    <text x="497" y="293" text-anchor="middle">ACE-Step / DiT</text>
+  </g>
+  <g id="b7">
+    <rect x="549" y="280" width="94" height="18" rx="3" fill="#0b1520"/>
+    <text x="596" y="293" text-anchor="middle">MDMAchine · 2026</text>
+  </g>
+</g>
+
+<text id="tagline" x="340" y="325" text-anchor="middle"
+      font-family="monospace" font-size="10" fill="#283c4c">
+  adaptive stiffness-switching ODE solver · manifold-stable · hum-suppressing · A&amp;E Concepts 2026
+</text>
+
+</svg>

@@ -1,0 +1,11 @@
+# STORM Sampler — Dependencies
+# torch is provided by the ComfyUI environment
+# Install these only if running standalone outside ComfyUI
+
+torch>=2.0.0
+numpy>=1.24.0
+pyyaml>=6.0
+
+# Optional: telemetry / trajectory plots
+# matplotlib>=3.7.0
+# pillow>=9.0.0
