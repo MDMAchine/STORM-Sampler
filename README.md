@@ -219,7 +219,7 @@ STORM is validated at `float32` and `bfloat16`. Strict `float16` can produce NaN
 | `core/storm_sampler_core_hotstep.lua` | HOT-Step optimized Lua (credit: scragnog) |
 | `samplers/MD_STORM_Sampler.py` | ComfyUI node wrapper |
 | `samplers/MD_LookBack_Smoother.py` | Standalone look-back smoother node |
-| `docs/STORM_White_Paper_v3.md` | arXiv pre-print |
+| `docs/STORM_White_Paper_v3_2.md` | arXiv pre-print |
 
 ---
 

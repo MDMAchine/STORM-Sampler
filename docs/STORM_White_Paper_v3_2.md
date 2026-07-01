@@ -5,16 +5,16 @@
 A&E Concepts, New Bedford MA  
 aallan@aeconcepts.net
 
-**Version:** v3.1 -- Pre-print -- Patent Pending  
+**Version:** v3.2 -- Pre-print -- Patent Pending  
 **Date:** June 2026  
 **arXiv target:** cs.SD (Sound), cross-list cs.LG  
-**Supersedes:** v3.0, v2.1, v2.0, v1.0
+**Supersedes:** v3.1, v3.0, v2.1, v2.0, v1.0
 
 *IP Notice: This paper establishes prior art for the STORM adaptive stiffness-switching ODE
 sampler, the Look-Back SNR trajectory smoother, the ODE manifold shearing suppression mechanism,
 and the NAG cross-attention suppression core (trade secret -- functional behavior described only,
 internals withheld). A provisional patent application covers these methods. Implementation details
-of the NAG core (nag_core.py) are withheld as trade secrets and are not disclosed in this paper.
+of the NAG core are withheld as trade secrets and are not disclosed in this paper.
 GPL v3 clean math is shared publicly. © 2026 Alexander Allan / A&E Concepts. All rights
 reserved.*
 
@@ -265,7 +265,7 @@ Brownian noise accumulates energy drift via `cumsum / sqrt(T)`.
 
 ### 3.7 NAG Cross-Attention Suppression Core
 
-*Internals withheld as trade secret (nag_core.py). Functional description only.
+*Internals withheld as trade secret. Functional description only.
 Described here for prior art and patent documentation. The NAG core is NOT included
 in the public STORM build and is NOT part of the evaluation configuration -- all
 experimental results in Section 4 are produced by the public GPL components
@@ -401,32 +401,9 @@ are modality-agnostic. Pre-registered future validation targets: LTX-Video, Wan,
 
 ---
 
-## 6. W_LC Inference Integration (Pre-Registered)
+## 6. Distribution and IP
 
-W_LC (Latent Curvature Coherence) is a latent geometry observable pre-registered for integration
-as an inference-time adaptive signal in STORM. W_LC measures cosine similarity between consecutive
-latent snapshots on a deterministic evaluation path -- a pure measure of trajectory geometry
-change. The validated range for well-converged flow-matching models is 1.43–1.59 (scale-invariant
-across 2.6B and 4B XL architectures).
-
-At inference time, W_LC computed over the ODE trajectory provides a real-time signal of manifold
-curvature. Anomalous W_LC (near 0.0 or 1.9999) at mid-sigma indicates manifold stress -- premature
-locking or anti-parallel divergence respectively.
-
-Planned integration as a dynamic regulator for the Look-Back lambda:
-
-```
-lambda_t = base_lambda * (1 - clamp((W_LC_t - W_LC_target) / W_LC_range, -1, 1))
-```
-
-This makes the smoother trajectory-adaptive: stronger smoothing at high manifold curvature,
-lighter smoothing in low-curvature regions where step detail is critical.
-
----
-
-## 7. Distribution and IP
-
-### 7.1 Public Distribution (GPL v3)
+### 6.1 Public Distribution (GPL v3)
 
 STORM is distributed as:
 - ComfyUI node (ComfyUI_MD_Nodes)
@@ -435,15 +412,15 @@ STORM is distributed as:
 
 All shared code uses clean GPL v3 mathematics. The NAG core is not included in public builds.
 
-### 7.2 Trade Secret Boundary
+### 6.2 Trade Secret Boundary
 
-`nag_core.py` (NAG cross-attention suppression core) is proprietary. Distributed only as a
+The NAG cross-attention suppression core is proprietary. Distributed only as a
 compiled binary. Source code is not shared under any circumstances. Subject to provisional patent
 application. This paper describes functional behavior only (Section 3.7).
 
 ---
 
-## 8. Conclusion
+## 7. Conclusion
 
 STORM demonstrates that adaptive solver dispatch based on real-time trajectory stiffness
 measurement is a viable and effective approach to improving diffusion inference quality without
@@ -480,4 +457,4 @@ ACE-Step team at ByteDance/StepFun for the base model.
 
 *© 2026 Alexander Allan (MDMAchine) · A&E Concepts*  
 *Patent Pending · Trade Secret (NAG core) · All Rights Reserved*  
-*Version 3.1 -- June 2026*
+*Version 3.2 -- July 2026*
