@@ -27,11 +27,3 @@ output/
 *.rar
 *.zip
 *.7z
-
-# Internal / private docs (should never be committed)
-STORM_Internal_Reference.md
-nag_core.py
-baks/
-omni_scan_root.py
-root_snapshot.txt
-STORM_REPO_INVENTORY.md
