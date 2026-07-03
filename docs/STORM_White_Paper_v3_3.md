@@ -4,16 +4,14 @@
 **Alexander Allan (MDMAchine)**  
 A&E Concepts, New Bedford MA  
 
-**Version:** v3.2, Pre-print, Patent Pending  
-**Date:** June 2026  
+**Version:** v3.3, Pre-print, Patent Pending  
+**Date:** July 2026  
 **arXiv target:** cs.SD (Sound), cross-list cs.LG  
-**Supersedes:** v3.1, v3.0, v2.1, v2.0, v1.0
+**Supersedes:** v3.2, v3.1, v3.0, v2.1, v2.0, v1.0
 
 *IP Notice: This paper establishes prior art for the STORM adaptive stiffness-switching ODE
-sampler, the Look-Back SNR trajectory smoother, the ODE manifold shearing suppression mechanism,
-and the NAG cross-attention suppression core (trade secret, functional behavior described only,
-internals withheld). A provisional patent application covers these methods. Implementation details
-of the NAG core are withheld as trade secrets and are not disclosed in this paper.
+sampler, the Look-Back SNR trajectory smoother, and the ODE manifold shearing suppression
+mechanism. A provisional patent application covers these methods.
 GPL v3 clean math is shared publicly. © 2026 Alexander Allan / A&E Concepts. All rights
 reserved.*
 
@@ -260,21 +258,6 @@ the principal direction reflects the immediate trajectory rather than stale hist
 low-sigma steps (σ < 0.3) inject energy into crystallizing signal and produce audible artifacts.
 When used, confine to early steps (step ≤ 7). Always use `ancestral_noise_type: "gaussian"`, Brownian noise accumulates energy drift via `cumsum / sqrt(T)`.
 
-### 3.7 NAG Cross-Attention Suppression Core
-
-*Internals withheld as trade secret. Functional description only.
-Described here for prior art and patent documentation. The NAG core is NOT included
-in the public STORM build and is NOT part of the evaluation configuration, all
-experimental results in Section 4 are produced by the public GPL components
-(Sections 3.1–3.6) without NAG active.*
-
-The NAG core addresses a failure mode where cross-attention pathology under high-stiffness
-conditions produces incoherent conditioning binding. Under high ancestral noise, cross-attention
-receives an off-manifold latent, producing diffuse attention maps that fail to bind genre, tempo,
-and structural conditioning correctly. The NAG core applies adaptive suppression to
-cross-attention under detected stiffness conditions, gating on stiffness detection and gating
-off as the trajectory re-stabilizes.
-
 ---
 
 ## 4. Experimental Validation
@@ -398,22 +381,14 @@ are modality-agnostic. Pre-registered future validation targets: LTX-Video, Wan,
 
 ---
 
-## 6. Distribution and IP
-
-### 6.1 Public Distribution (GPL v3)
+## 6. Distribution
 
 STORM is distributed as:
 - ComfyUI node (ComfyUI_MD_Nodes)
 - C++ header-only (storm_sampler_core.hpp, C++17)
 - Lua solver plugin (HOT-Step native)
 
-All shared code uses clean GPL v3 mathematics. The NAG core is not included in public builds.
-
-### 6.2 Trade Secret Boundary
-
-The NAG cross-attention suppression core is proprietary. Distributed only as a
-compiled binary. Source code is not shared under any circumstances. Subject to provisional patent
-application. This paper describes functional behavior only (Section 3.7).
+All shared code uses clean GPL v3 mathematics.
 
 ---
 
@@ -453,5 +428,5 @@ ACE-Step team at ByteDance/StepFun for the base model.
 ---
 
 *© 2026 Alexander Allan (MDMAchine) · A&E Concepts*  
-*Patent Pending · Trade Secret (NAG core) · All Rights Reserved*  
-*Version 3.2, July 2026*
+*Patent Pending · All Rights Reserved*  
+*Version 3.3, July 2026*
