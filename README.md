@@ -219,7 +219,7 @@ STORM is validated at `float32` and `bfloat16`. Strict `float16` can produce NaN
 | `core/storm_sampler_core_hotstep.lua` | HOT-Step optimized Lua (credit: scragnog) |
 | `samplers/MD_STORM_Sampler.py` | ComfyUI node wrapper |
 | `samplers/MD_LookBack_Smoother.py` | Standalone look-back smoother node |
-| `docs/STORM_White_Paper_v3_2.md` | Technical white paper |
+| `docs/STORM_White_Paper_v3_3.md` | Technical white paper |
 
 ---
 
@@ -246,7 +246,7 @@ Commercial closed-source integration requires a dual-license commercial exemptio
 
 Full technical treatment of the stiffness-detecting solver dispatch, look-back SNR smoother, and velocity-aligned SDE restarts:
 
-[`docs/STORM_White_Paper_v3_2.md`](docs/STORM_White_Paper_v3_2.md)
+[`docs/STORM_White_Paper_v3_3.md`](docs/STORM_White_Paper_v3_3.md)
 
 ---
 
