@@ -250,4 +250,4 @@ Full technical treatment of the stiffness-detecting solver dispatch, look-back S
 
 ---
 
-*© 2026 Alexander Allan (MDMAchine) · A&E Concepts · Patent Pending*
+*© 2026 Alexander Allan (MDMAchine) · A&E Concepts*
