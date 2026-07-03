@@ -350,8 +350,8 @@ mechanism:
 **dernet / iRedsneth** (side-step training tool): Built a full STORM UI in 44 minutes. Porting
 to C++.
 
-**mmoalem**: Running automated sampler comparison tests via `omni_score.py` (CLAP embedding
-batch perceptual similarity scorer).
+mmoalem: Running automated sampler comparison tests (CLAP embedding batch
+perceptual similarity scoring).
 
 ### 4.6 Perceptual Result
 

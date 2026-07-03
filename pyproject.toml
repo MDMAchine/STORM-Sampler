@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "GPL-3.0-or-later" }
 authors = [
-    { name = "Alexander Allan (MDMAchine)", email = "aallan@aeconcepts.net" },
+    { name = "Alexander Allan (MDMAchine)" },
 ]
 keywords = ["diffusion", "sampler", "ode", "flow-matching", "audio", "comfyui", "ace-step"]
 classifiers = [
