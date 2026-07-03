@@ -226,11 +226,12 @@ STORM is validated at `float32` and `bfloat16`. Strict `float16` can produce NaN
 ## Acknowledgments
 
 - **[scragnog / Captain HOT-Step](https://github.com/scragnog/HOT-Step-CPP)**, HOT-Step-CPP maintainer. Same-day STORM implementation, HOT-Step Lua port, perceptual validation. The `scragnog_edit` Lua file is his work. Shoutout to scragnog for featuring STORM in HOT-Step-CPP and the love shown on the [HOT-Step repo](https://github.com/scragnog/HOT-Step-CPP).
-- **[serveurperso](https://github.com/ServeurpersoCom/acestep.cpp)**, acestep.cpp maintainer. C++ integration and review.
+- **[serveurperso](https://github.com/ServeurpersoCom/acestep.cpp)**, acestep.cpp maintainer. C++ review.
 - **mvdirty**, perceptual validation. Coined "metallic twinge to musical saturation."
-- **[dernet / iRedsneth](https://github.com/koda-dernet/Side-Step)**, STORM UI in 44 minutes. C++ port in progress.
+- **[dernet / iRedsneth](https://github.com/koda-dernet/Side-Step)**, STORM UI C++ concept in 44 minutes.
 - **Helikaon23**, early testing and feedback.
 - **mmoalem**, automated sampler comparison testing.
+- **Illynir**, thorough and ongoing HOT-Step and ComfyUI testing.
 
 ---
 
