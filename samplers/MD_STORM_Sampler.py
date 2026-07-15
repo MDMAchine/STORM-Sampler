@@ -51,11 +51,16 @@ except ImportError:
 try:
     from ..core.storm_sampler_core import storm_sampler
     _STORM_SOURCE = "core"
-except ImportError:
+except (ImportError, SystemError):
     try:
+        import sys as _sys
+        _core_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "core")
+        if _core_dir not in _sys.path:
+            _sys.path.insert(0, _core_dir)
         from storm_sampler_core import storm_sampler
-        _STORM_SOURCE = "local"
-    except ImportError:
+        _STORM_SOURCE = "core_path"
+    except Exception as e:
+        print(f"[MD_STORM] core import failed: {e}")
         storm_sampler = None
         _STORM_SOURCE = "unavailable"
 
