@@ -1,7 +1,7 @@
 """
 scan_repo.py
 Prints a tree of the repo work folder, flags anything that should be gitignored.
-Run from anywhere: python scan_repo.py "D:\Projects\STORM"
+Run from anywhere: python scan_repo.py "/path/to/repo"
 Or drop it in the folder and run: python scan_repo.py
 
 Flag lists below are intentionally generic. If you have project-specific files
